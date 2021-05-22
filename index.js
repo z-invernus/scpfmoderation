@@ -2,15 +2,12 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const config = require('./config.json')
-const poll = require('./poll')
 const privateMessage = require('./private-message')
 const command = require('./command')
 const welcome = require('./welcome')
 
 client.on('ready', () => {
     console.log('Moderation successfully started.')
-
-    poll(client)
 
     welcome(client)
 
@@ -77,6 +74,14 @@ client.on('ready', () => {
                 {
                     name: 's!set-status',
                     value: 'Sets the bot status \n **Permissions required:** BOT Owner',
+                },
+                {
+                    name: 's!ban',
+                    value: 'Bans the mentioned user from the server. Forever. \n **Permissions required:** Ban Members / Administrator',
+                },
+                {
+                    name: 's!kick',
+                    value: 'Kicks the mentioned user from the server. \n **Permissions required:** Kick Members / Administrator',
                 },
         )
             .setFooter(`PREFIX: ${prefix}`)

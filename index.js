@@ -4,12 +4,9 @@ const client = new Discord.Client()
 const config = require('./config.json')
 const privateMessage = require('./private-message')
 const command = require('./command')
-const welcome = require('./welcome')
 
 client.on('ready', () => {
     console.log('Moderation successfully started.')
-
-    welcome(client)
 
     command(client, 'set-status', (message) => {
         const content = message.content.replace('s!set-status ', '')

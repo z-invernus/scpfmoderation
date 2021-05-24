@@ -4,9 +4,21 @@ const client = new Discord.Client()
 const config = require('./config.json')
 const privateMessage = require('./private-message')
 const command = require('./command')
+const mongo = require('./mongo')
+const welcome = require('./welcome')
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('Moderation successfully started.')
+
+    await mongo().then(mongoose => {
+        try {
+            console.log('Connected to mongo.')
+        } finally {
+            mongoose.connection.close()
+        }
+    })
+
+    welcome(client)
 
     command(client, 'set-status', (message) => {
         const content = message.content.replace('s!set-status ', '')
